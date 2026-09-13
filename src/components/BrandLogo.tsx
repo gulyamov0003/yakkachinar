@@ -1,8 +1,9 @@
+import { publicUrl } from '../lib/image';
 import './BrandLogo.css';
 
 /** Isolated from the official logo file by scripts/build-logo.py — never redrawn. */
 const WIDTHS = [128, 256, 512, 1024] as const;
-export const logoUrl = (width: (typeof WIDTHS)[number]) => `/brand/yakkachinar-logo-${width}.webp`;
+export const logoUrl = (width: (typeof WIDTHS)[number]) => publicUrl(`brand/yakkachinar-logo-${width}.webp`);
 
 interface BrandLogoProps {
   /** Rendered size for srcset selection, e.g. "40px" or "(min-width: 768px) 112px, 88px". */

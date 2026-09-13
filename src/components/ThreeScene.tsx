@@ -28,6 +28,7 @@ import {
   WebGLRenderer,
   type Texture,
 } from 'three';
+import { publicUrl } from '../lib/image';
 
 interface ThreeSceneProps {
   className?: string;
@@ -39,10 +40,10 @@ interface ThreeSceneProps {
 
 /** Maps generated from the official logo file by scripts/build-logo.py. */
 const TEXTURES = {
-  color: '/brand/yakkachinar-medallion-color.webp',
-  gold: '/brand/yakkachinar-logo-gold-512.webp',
-  orm: '/brand/yakkachinar-medallion-orm.webp',
-  bump: '/brand/yakkachinar-medallion-bump.webp',
+  color: publicUrl('brand/yakkachinar-medallion-color.webp'),
+  gold: publicUrl('brand/yakkachinar-logo-gold-512.webp'),
+  orm: publicUrl('brand/yakkachinar-medallion-orm.webp'),
+  bump: publicUrl('brand/yakkachinar-medallion-bump.webp'),
 } as const;
 
 const FACE_RADIUS = 1;

@@ -19,11 +19,20 @@ function nearestWidth(width: number): number {
   return RESPONSIVE_WIDTHS.find((candidate) => candidate >= width) ?? RESPONSIVE_WIDTHS[RESPONSIVE_WIDTHS.length - 1];
 }
 
+/**
+ * URL of a file in public/, resolved against Vite's base path (`/yakkachinar/` on GitHub Pages).
+ * Vite rewrites public URLs in HTML and CSS, but not strings in JavaScript: a hard-coded
+ * '/brand/logo.webp' would point at the domain root and 404 when the site lives in a subfolder.
+ */
+export function publicUrl(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+}
+
 /** URL for a given rendered width. Unsplash negotiates AVIF/WebP automatically via `auto=format`. */
 export function photoUrl(photo: Photo, width: number, quality = 72): string {
   if (photo.src.startsWith(UNSPLASH)) return `${photo.src}?auto=format&fit=max&w=${width}&q=${quality}`;
-  if (photo.src.includes('{w}')) return photo.src.replace('{w}', String(nearestWidth(width)));
-  return photo.src;
+  const src = photo.src.startsWith('/') && !photo.src.startsWith('//') ? publicUrl(photo.src) : photo.src;
+  return src.includes('{w}') ? src.replace('{w}', String(nearestWidth(width))) : src;
 }
 
 export function photoSrcSet(photo: Photo, widths: readonly number[] = RESPONSIVE_WIDTHS): string | undefined {

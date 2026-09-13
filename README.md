@@ -8,10 +8,12 @@ A cinematic, trilingual (Тоҷикӣ · Русский · English) website conc
 npm install
 npm run dev        # http://localhost:5173
 npm run build      # translation audit → type check → production build in dist/
-npm run preview    # serve the production build on http://localhost:4173
+npm run preview    # serve the production build on http://localhost:4173/yakkachinar/ (same path as GitHub Pages)
 npm run i18n:check # translation audit only
 npm run logo       # rebuild public/brand/* and the favicons from the official logo (Python 3 + Pillow)
 ```
+
+**Deployment.** `.github/workflows/deploy.yml` builds every push to `main` and publishes `dist/` to GitHub Pages at https://gulyamov0003.github.io/yakkachinar/. Because the site lives in the `/yakkachinar/` subfolder, production URLs are built with that prefix (`base` in `vite.config.ts`; build with `BASE_PATH=/` for a domain root). In code, reference files from `public/` through `publicUrl('brand/…')` from `src/lib/image.ts` — a hard-coded `'/brand/…'` string points at the domain root and 404s on GitHub Pages. (Paths in `index.html` and CSS `url()` are rewritten by Vite automatically.)
 
 Stack: Vite 8 · React 19 · TypeScript 7 · Motion (animation) · Lenis (smooth scroll) · Three.js (lazy-loaded 3D logo medallion). Fonts are self-hosted through Fontsource: **Cormorant** (display) and **Inter Tight** (UI/body) — both verified to contain the Tajik letters Ғ Ӣ Қ Ӯ Ҳ Ҷ.
 
