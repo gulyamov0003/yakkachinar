@@ -1,0 +1,102 @@
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.lang__option {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.45rem;
+  color: var(--ivory-muted);
+  transition: color 0.45s var(--ease-lux);
+}
+
+.lang__text {
+  position: relative;
+  z-index: 1;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  /* Balance the trailing letter-spacing so the code sits optically centred. */
+  margin-right: -0.16em;
+}
+
+.lang__option:hover,
+.lang__option.is-active {
+  color: var(--ivory);
+}
+
+.lang__indicator,
+.lang--compact .lang__option::after {
+  position: absolute;
+  left: 50%;
+  bottom: 0.5rem;
+  width: 1.1rem;
+  height: 1px;
+  margin-left: -0.55rem;
+  background: var(--gold);
+}
+
+/* Hover preview: a fainter underline, so the active language always reads strongest. */
+.lang--compact .lang__option::after {
+  content: '';
+  background: var(--gold-line);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .lang--compact .lang__option:not(.is-active):hover::after {
+    transform: scaleX(1);
+  }
+
+  .lang--full .lang__option:not(.is-active):hover {
+    border-color: var(--gold-line);
+  }
+}
+
+.lang__option:active .lang__text {
+  transform: translateY(1px);
+}
+
+.lang__text {
+  transition: transform 0.2s var(--ease-lux);
+}
+
+/* Full variant — native names in elegant pills (mobile menu, footer) */
+.lang--full {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.lang--full .lang__option {
+  min-height: 3rem;
+  padding: 0 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition:
+    color 0.45s var(--ease-lux),
+    border-color 0.45s var(--ease-lux);
+}
+
+.lang--full .lang__text {
+  margin-right: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.lang--full .lang__indicator {
+  inset: -1px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--gold-veil);
+}

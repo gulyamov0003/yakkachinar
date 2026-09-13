@@ -1,0 +1,16 @@
+.counter {
+  position: relative;
+  display: inline-block;
+}
+
+/* Reserves the final width and height; the animated digits sit on top of it. */
+.counter__sizer {
+  visibility: hidden;
+}
+
+.counter__value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+}

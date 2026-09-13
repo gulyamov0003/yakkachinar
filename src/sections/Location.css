@@ -1,0 +1,266 @@
+.location {
+  background:
+    radial-gradient(60% 50% at 85% 40%, rgb(201 169 110 / 0.05), transparent 70%),
+    var(--ink-900);
+}
+
+.location__grid {
+  display: grid;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+
+.location__info {
+  display: grid;
+  align-content: start;
+  gap: clamp(2rem, 4vw, 3rem);
+  min-width: 0;
+}
+
+.location__place {
+  container-type: inline-size;
+}
+
+/* Sized to its column (the name is ≈5.5em wide) so it stays on one line in every language. */
+.location__city {
+  font-family: var(--font-display);
+  font-size: min(7rem, 16cqi);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.location__country {
+  margin-top: 0.85rem;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.location__details {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.location__row {
+  display: grid;
+  gap: 0.4rem 1.5rem;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.location__row dt {
+  padding-top: 0.3rem;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+}
+
+.location__row dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  min-width: 0;
+  font-size: 1.05rem;
+}
+
+.location__code {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.location__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ivory-soft);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgb(242 235 223 / 0.05), rgb(242 235 223 / 0));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  transition:
+    border-color 0.4s var(--ease-lux),
+    color 0.4s var(--ease-lux),
+    transform 0.45s var(--ease-lux);
+}
+
+.location__copy svg {
+  color: var(--gold);
+}
+
+@media (hover: hover) {
+  .location__copy:hover {
+    color: var(--ivory);
+    border-color: var(--gold-line);
+    transform: translateY(-1px);
+  }
+}
+
+.location__copy:active {
+  transform: translateY(1px) scale(0.97);
+  transition-duration: 0.1s;
+}
+
+.location__hint {
+  flex-basis: 100%;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--ivory-muted);
+}
+
+/* A quiet underline; on hover a solid gold line draws over it. */
+.location__link {
+  white-space: nowrap;
+  background:
+    linear-gradient(var(--gold), var(--gold)) 0 100% / 0% 1px no-repeat,
+    linear-gradient(var(--gold-line), var(--gold-line)) 0 100% / 100% 1px no-repeat;
+  transition:
+    color 0.4s var(--ease-lux),
+    background-size 0.8s var(--ease-lux);
+}
+
+.location__link:hover {
+  color: var(--gold-bright);
+  background-size: 100% 1px, 100% 1px;
+}
+
+.location__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+}
+
+.location__map-wrap {
+  display: grid;
+  min-width: 0;
+}
+
+.location__map {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ink-800);
+  border: 1px solid var(--line);
+}
+
+.location__map iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.2) invert(0.9) hue-rotate(180deg) brightness(0.9) contrast(0.92) sepia(0.2);
+}
+
+/* Softens the map's edges into the page and adds an inner hairline, like a framed print. */
+.location__map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgb(201 169 110 / 0.12),
+    inset 0 0 90px 10px rgb(8 7 6 / 0.55);
+}
+
+.location__corner {
+  position: absolute;
+  z-index: 2;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 0 solid var(--gold);
+  pointer-events: none;
+  transition:
+    width 0.9s var(--ease-lux),
+    height 0.9s var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .location__map:hover .location__corner {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+.location__corner--tl {
+  top: 0.8rem;
+  left: 0.8rem;
+  border-width: 1px 0 0 1px;
+}
+
+.location__corner--tr {
+  top: 0.8rem;
+  right: 0.8rem;
+  border-width: 1px 1px 0 0;
+}
+
+.location__corner--bl {
+  bottom: 0.8rem;
+  left: 0.8rem;
+  border-width: 0 0 1px 1px;
+}
+
+.location__corner--br {
+  right: 0.8rem;
+  bottom: 0.8rem;
+  border-width: 0 1px 1px 0;
+}
+
+.location__badge {
+  position: absolute;
+  z-index: 2;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: calc(100% - 3rem);
+  padding: 0.6rem 0.95rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  background: rgb(12 11 9 / 0.86);
+  border: 1px solid var(--gold-line);
+  pointer-events: none;
+}
+
+@media (min-width: 560px) {
+  .location__row {
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+  }
+
+  .location__map {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .location__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: stretch;
+  }
+
+  .location__map {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 34rem;
+  }
+}

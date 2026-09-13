@@ -1,0 +1,35 @@
+.image-reveal {
+  position: relative;
+}
+
+.image-reveal .image-reveal__mask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.image-reveal__parallax {
+  position: absolute;
+  inset: -9% 0;
+}
+
+.image-reveal__zoom {
+  position: absolute;
+  inset: 0;
+}
+
+.image-reveal .picture {
+  position: absolute;
+  inset: 0;
+  transition:
+    transform 1.4s var(--ease-lux),
+    filter 1s var(--ease-lux),
+    opacity 1.1s var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .image-reveal:hover .picture {
+    transform: scale(1.03);
+    filter: brightness(1.06);
+  }
+}

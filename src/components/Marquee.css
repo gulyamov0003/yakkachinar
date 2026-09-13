@@ -1,0 +1,57 @@
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 52s linear infinite;
+}
+
+.marquee__group {
+  display: flex;
+  flex: none;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3.25rem);
+  padding-right: clamp(1.5rem, 3vw, 3.25rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.5vw, 6.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  white-space: nowrap;
+  color: var(--ivory);
+}
+
+.marquee__item.is-outline {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(242 235 223 / 0.42);
+}
+
+/* A small gold lozenge — an ornament, deliberately not a brand mark. */
+.marquee__separator {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+  transform: rotate(45deg);
+  box-shadow: 0 0 0.8rem rgb(201 169 110 / 0.3);
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}

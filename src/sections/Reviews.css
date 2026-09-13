@@ -1,0 +1,181 @@
+.reviews {
+  overflow: hidden;
+  background:
+    radial-gradient(70% 55% at 30% 45%, rgb(42 15 21 / 0.5), transparent 70%),
+    var(--ink-900);
+}
+
+/* The crest as a quiet seal behind the rating — static, faded towards its edge. */
+.reviews__seal {
+  position: absolute;
+  top: 50%;
+  right: max(-9rem, -12vw);
+  pointer-events: none;
+  opacity: 0.09;
+  transform: translateY(-50%);
+  -webkit-mask-image: radial-gradient(circle, #000 50%, transparent 71%);
+  mask-image: radial-gradient(circle, #000 50%, transparent 71%);
+}
+
+.reviews__seal-logo {
+  --logo-size: min(90vw, 35rem);
+}
+
+.reviews__seal-logo .brand-logo__image {
+  box-shadow: none;
+}
+
+.reviews__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(3rem, 6vw, 5.5rem);
+}
+
+.reviews__stats {
+  display: grid;
+  gap: 3rem;
+  align-items: end;
+}
+
+.reviews__stat--rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.25rem 2.25rem;
+}
+
+.reviews__number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 11vw, 10rem);
+  font-weight: 300;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  font-variant-numeric: lining-nums;
+  white-space: nowrap;
+  color: var(--ivory);
+}
+
+.reviews__number--rating {
+  font-size: clamp(6.5rem, 18vw, 16.5rem);
+  padding-right: 0.04em;
+}
+
+/* The gradient sits on the digits themselves: background-clip: text ignores positioned children. */
+.reviews__number--rating .counter__value {
+  padding-right: 0.04em;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.reviews__rating-meta {
+  display: grid;
+  gap: 0.2rem;
+  padding-bottom: 0.9rem;
+}
+
+.reviews__label {
+  margin-top: 1rem;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+}
+
+.reviews__rating-meta .reviews__label {
+  margin-top: 0.6rem;
+}
+
+.reviews__divider {
+  display: none;
+}
+
+.reviews__footer {
+  display: grid;
+  gap: 2rem;
+  max-width: 44rem;
+}
+
+.reviews__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+}
+
+.reviews__source {
+  font-size: var(--fs-small);
+  color: var(--ivory-muted);
+}
+
+.stars {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.stars__row {
+  display: flex;
+}
+
+.stars__row svg {
+  width: clamp(1.4rem, 2.2vw, 1.85rem);
+  height: clamp(1.4rem, 2.2vw, 1.85rem);
+}
+
+.stars__row--base {
+  color: rgb(201 169 110 / 0.22);
+}
+
+.stars__row--fill {
+  position: absolute;
+  inset: 0;
+  color: var(--gold-bright);
+}
+
+.reviews__quotes {
+  display: grid;
+  gap: 2rem;
+}
+
+.reviews__quote-list {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+.reviews__quote {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.reviews__quote .display {
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.reviews__quote-author {
+  font-size: var(--fs-small);
+  color: var(--ivory-muted);
+}
+
+@media (min-width: 960px) {
+  .reviews__stats {
+    grid-template-columns: auto 1px auto;
+    justify-content: start;
+    gap: clamp(3rem, 6vw, 7rem);
+  }
+
+  .reviews__divider {
+    display: block;
+    align-self: stretch;
+    background: linear-gradient(to bottom, transparent, var(--line-strong), transparent);
+  }
+}

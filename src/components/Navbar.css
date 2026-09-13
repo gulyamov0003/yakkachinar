@@ -1,0 +1,232 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-nav);
+  padding-top: env(safe-area-inset-top);
+  transition:
+    background-color 0.7s var(--ease-lux),
+    box-shadow 0.7s var(--ease-lux),
+    backdrop-filter 0.7s var(--ease-lux);
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -2.5rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(8 7 6 / 0.62), rgb(8 7 6 / 0));
+  transition: opacity 0.7s var(--ease-lux);
+}
+
+.nav--scrolled {
+  background: rgb(12 11 9 / 0.74);
+  box-shadow: inset 0 -1px 0 var(--line);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.nav--scrolled::before {
+  opacity: 0;
+}
+
+.nav__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  height: var(--nav-height);
+  transition: height 0.7s var(--ease-lux);
+}
+
+.nav--scrolled .nav__bar {
+  height: 4.25rem;
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 2.75rem;
+  flex: none;
+  color: var(--ivory);
+}
+
+.nav__logo {
+  --logo-size: 2.5rem;
+  transition:
+    width 0.7s var(--ease-lux),
+    height 0.7s var(--ease-lux),
+    transform 0.7s var(--ease-lux);
+}
+
+.nav--scrolled .nav__logo {
+  --logo-size: 2.125rem;
+}
+
+.nav__brand:hover .nav__logo {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 767px) {
+  .nav__logo,
+  .nav--scrolled .nav__logo {
+    --logo-size: 2.125rem;
+  }
+}
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-right: -0.3em;
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: none;
+}
+
+.nav__links ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 1.55vw, 2.1rem);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ivory-soft);
+  transition: color 0.45s var(--ease-lux);
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--ivory);
+}
+
+/* Hover preview under inactive links; the active section keeps its gold dot. */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0.13em;
+  bottom: 0.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+  transform: scaleX(0);
+  transition: transform 0.6s var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .nav__link:not(.is-active):hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.nav__active {
+  position: absolute;
+  left: 50%;
+  bottom: 0.2rem;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav__lang,
+.nav__reserve {
+  display: none !important;
+}
+
+/* The magnetic halo may not reach past the bar's edge. */
+.nav__reserve::before {
+  inset: -6px 0;
+}
+
+.nav__toggle {
+  display: inline-grid;
+  /* Icon aligned to the container edge; the tap target stays 48px. */
+  place-items: center end;
+  width: 3rem;
+  height: 3rem;
+  color: var(--ivory);
+  transition: color 0.4s var(--ease-lux);
+}
+
+.nav__toggle:hover {
+  color: var(--gold-bright);
+}
+
+.nav__toggle:active svg {
+  transform: scale(0.92);
+}
+
+.nav__toggle svg {
+  transition: transform 0.3s var(--ease-lux);
+}
+
+@media (max-width: 359px) {
+  .nav__bar {
+    gap: 0.75rem;
+  }
+
+  .nav__wordmark {
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+    margin-right: -0.22em;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav__lang,
+  .nav__reserve {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .nav__links {
+    display: block;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+}
+
+/* Laptop widths: tighten rhythm so the longest labels (Russian, Tajik) still fit on one line. */
+@media (min-width: 1280px) and (max-width: 1499px) {
+  .nav__bar {
+    gap: 1rem;
+  }
+
+  .nav__links ul {
+    gap: 1.05vw;
+  }
+
+  .nav__link {
+    letter-spacing: 0.1em;
+  }
+
+  .nav__wordmark {
+    letter-spacing: 0.22em;
+    margin-right: -0.22em;
+  }
+}

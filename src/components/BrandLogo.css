@@ -1,0 +1,91 @@
+.brand-logo {
+  --logo-size: 2.5rem;
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  border-radius: 50%;
+  isolation: isolate;
+}
+
+.brand-logo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* A hairline of gold keeps the black crest defined against dark backgrounds. */
+  box-shadow:
+    0 0 0 1px rgb(201 169 110 / 0.3),
+    0 0.35em 1.1em rgb(0 0 0 / 0.45);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Light sweep, masked to the gold artwork so the black enamel never lights up. */
+.brand-logo__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+      112deg,
+      transparent 32%,
+      rgb(255 246 222 / 0.9) 47%,
+      rgb(255 232 180 / 0.45) 53%,
+      transparent 68%
+    )
+    no-repeat;
+  background-size: 260% 100%;
+  background-position: 135% 0;
+  -webkit-mask: url('/brand/yakkachinar-logo-gold-256.webp') center / 100% 100% no-repeat;
+  mask: url('/brand/yakkachinar-logo-gold-256.webp') center / 100% 100% no-repeat;
+  mix-blend-mode: screen;
+}
+
+.brand-logo.is-periodic .brand-logo__sheen {
+  animation: brand-sheen-loop 9s var(--ease-lux) 1.8s infinite;
+}
+
+.brand-logo.is-shining .brand-logo__sheen,
+.sheen-on-hover:hover .brand-logo__sheen,
+.sheen-on-hover:focus-visible .brand-logo__sheen {
+  animation: brand-sheen 1.5s var(--ease-lux) both;
+}
+
+/* The same sweep, repeating quietly with a long rest in between. */
+@keyframes brand-sheen-loop {
+  0% {
+    opacity: 0;
+    background-position: 135% 0;
+  }
+
+  3%,
+  13% {
+    opacity: 1;
+  }
+
+  17%,
+  100% {
+    opacity: 0;
+    background-position: -35% 0;
+  }
+}
+
+@keyframes brand-sheen {
+  0% {
+    opacity: 0;
+    background-position: 135% 0;
+  }
+
+  18%,
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    background-position: -35% 0;
+  }
+}

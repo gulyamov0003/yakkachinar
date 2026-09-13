@@ -1,0 +1,345 @@
+/* ==========================================================================
+   PremiumButton — a physical control: lit from above, lifts on hover, presses on click.
+   Outer .btn = hit area + magnetic drift. Inner .btn__surface = everything visible.
+   ========================================================================== */
+
+.btn {
+  --btn-min-h: 3.25rem;
+  --btn-px: 1.75rem;
+  --btn-gap: 0.8rem;
+  --btn-lift: -3px;
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  vertical-align: middle;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.17em;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* An invisible halo so the magnetic pull begins as the pointer approaches. */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+}
+
+.btn--sm {
+  --btn-min-h: 2.75rem;
+  --btn-px: 1.2rem;
+  --btn-gap: 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+}
+
+.btn--lg {
+  --btn-min-h: 3.75rem;
+  --btn-px: 2.1rem;
+}
+
+.btn__surface {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  min-width: 0;
+  min-height: var(--btn-min-h);
+  padding: 0.7rem var(--btn-px);
+  overflow: hidden;
+  border-radius: inherit;
+  transition:
+    transform 0.55s var(--ease-lux),
+    box-shadow 0.55s var(--ease-lux),
+    color 0.5s var(--ease-lux);
+}
+
+.btn__label {
+  position: relative;
+  z-index: 3;
+}
+
+.btn__icon {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  flex: none;
+  transition:
+    transform 0.6s var(--ease-lux),
+    color 0.5s var(--ease-lux);
+}
+
+.btn__icon:not(.btn__icon--arrow) svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn__fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  transition: transform 0.7s var(--ease-lux);
+}
+
+.btn__shine {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 0;
+  z-index: 2;
+  width: 42%;
+  pointer-events: none;
+  transform: translateX(-130%) skewX(-18deg);
+}
+
+/* Gradient hairline border (mask keeps only the 1px ring). */
+.btn__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.6;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.6s var(--ease-lux);
+}
+
+/* Solid — warm ivory, lit from above; gold rises from below on hover */
+.btn--solid .btn__surface {
+  color: var(--ink-900);
+  background: linear-gradient(180deg, #f8f3e9 0%, #ebe0cd 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.75),
+    inset 0 -1px 0 rgb(120 92 48 / 0.28),
+    0 1px 1px rgb(0 0 0 / 0.35),
+    0 12px 26px -14px rgb(0 0 0 / 0.75);
+}
+
+.btn--solid .btn__fill {
+  background: linear-gradient(180deg, #efdcb0 0%, #cfb07a 100%);
+}
+
+.btn--solid .btn__shine {
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent);
+}
+
+.btn--solid .btn__frame {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(156 124 72 / 0.5));
+}
+
+.btn--solid .btn__icon {
+  color: var(--gold-deep);
+}
+
+/* Outline — smoked glass with a gold hairline */
+.btn--outline .btn__surface {
+  color: var(--ivory);
+  background:
+    linear-gradient(180deg, rgb(242 235 223 / 0.08), rgb(242 235 223 / 0.015)),
+    rgb(12 11 9 / 0.35);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 12px 28px -16px rgb(0 0 0 / 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn--outline .btn__fill {
+  background: linear-gradient(180deg, rgb(231 210 164 / 0.12), rgb(201 169 110 / 0.03));
+}
+
+.btn--outline .btn__shine {
+  background: linear-gradient(90deg, transparent, rgb(231 210 164 / 0.22), transparent);
+}
+
+.btn--outline .btn__frame {
+  background: linear-gradient(135deg, rgb(231 210 164 / 0.75), rgb(242 235 223 / 0.16) 45%, rgb(201 169 110 / 0.6));
+}
+
+.btn--outline .btn__icon {
+  color: var(--gold);
+}
+
+/* Ghost — text link with a drawing underline */
+.btn--ghost .btn__surface {
+  --btn-px: 0;
+  min-height: 2.75rem;
+  overflow: visible;
+  color: var(--ivory);
+}
+
+.btn--ghost .btn__fill,
+.btn--ghost .btn__shine,
+.btn--ghost .btn__frame {
+  display: none;
+}
+
+.btn--ghost .btn__label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0.28);
+  transform-origin: 0 50%;
+  transition: transform 0.7s var(--ease-lux);
+}
+
+.btn--ghost .btn__icon {
+  color: var(--gold);
+}
+
+@media (hover: hover) {
+  .btn:not(.btn--ghost):hover .btn__surface {
+    transform: translateY(var(--btn-lift));
+  }
+
+  .btn--solid:hover .btn__surface {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.8),
+      inset 0 -1px 0 rgb(120 92 48 / 0.3),
+      0 2px 2px rgb(0 0 0 / 0.25),
+      0 22px 36px -16px rgb(0 0 0 / 0.8),
+      0 0 0 1px rgb(201 169 110 / 0.35);
+  }
+
+  .btn--outline:hover .btn__surface {
+    color: var(--gold-bright);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.12),
+      0 22px 38px -18px rgb(0 0 0 / 0.95);
+  }
+
+  .btn:hover .btn__fill {
+    transform: scaleY(1);
+  }
+
+  .btn:hover .btn__frame {
+    opacity: 1;
+  }
+
+  .btn:hover .btn__shine {
+    transform: translateX(330%) skewX(-18deg);
+    transition: transform 1s var(--ease-lux);
+  }
+
+  .btn--solid:hover .btn__icon {
+    color: var(--ink-900);
+  }
+
+  .btn:hover .btn__icon--arrow {
+    transform: translateX(4px);
+  }
+
+  .btn:hover .btn__icon--external {
+    transform: translate(2px, -2px);
+  }
+
+  .btn:hover .btn__icon--calendar {
+    transform: translateY(-1px) rotate(-6deg);
+  }
+
+  .btn:hover .btn__icon--phone {
+    animation: btn-ring 0.7s var(--ease-lux);
+  }
+
+  .btn:hover .btn__icon--navigation {
+    transform: translate(1px, -1px) rotate(10deg);
+  }
+
+  .btn:hover .btn__icon--instagram,
+  .btn:hover .btn__icon--pin {
+    transform: scale(1.1);
+  }
+
+  .btn--ghost:hover .btn__label::after {
+    transform: scaleX(1);
+  }
+}
+
+.btn:not(.btn--ghost):active .btn__surface {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 0.12s;
+}
+
+.btn--solid:active .btn__surface {
+  box-shadow:
+    inset 0 1px 3px rgb(0 0 0 / 0.18),
+    0 1px 1px rgb(0 0 0 / 0.3);
+}
+
+.btn--outline:active .btn__surface {
+  box-shadow: inset 0 1px 4px rgb(0 0 0 / 0.45);
+}
+
+.btn:focus-visible {
+  outline: none;
+}
+
+.btn:focus-visible .btn__surface {
+  outline: 1.5px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+.btn:focus-visible .btn__frame {
+  opacity: 1;
+}
+
+/*
+ * Phones: a tighter rhythm keeps long Tajik and Russian labels on one line from 360px up.
+ * A button that leads with an icon drops its trailing arrow here — without hover it is only decoration.
+ */
+@media (max-width: 400px) {
+  .btn,
+  .btn--lg {
+    --btn-px: 1.15rem;
+    --btn-gap: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  .btn--lead .btn__icon--trail {
+    display: none;
+  }
+}
+
+@keyframes btn-ring {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  20% {
+    transform: rotate(-14deg);
+  }
+
+  40% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(-6deg);
+  }
+
+  80% {
+    transform: rotate(3deg);
+  }
+}

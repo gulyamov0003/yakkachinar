@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Yakkachinar — Restaurant &amp; Live Entertainment in Dushanbe</title>
+    <meta
+      name="description"
+      content="Yakkachinar in Dushanbe: a sophisticated interior, international-style cuisine, live music and celebrations. Open every day. Reservations: +992 00 060 0400."
+    />
+    <meta name="theme-color" content="#0c0b09" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Yakkachinar" />
+    <meta property="og:title" content="Yakkachinar — Dushanbe" />
+    <meta property="og:description" content="An evening worth remembering. Restaurant, live music and celebrations in Dushanbe, Tajikistan." />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/brand/yakkachinar-logo-256.webp" fetchpriority="high" />
+    <style>
+      /* Logo preloader: painted from the HTML so it covers the moment before JavaScript runs. */
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(60% 50% at 50% 50%, #17120d 0%, #0c0b09 70%);
+        transition:
+          opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+          visibility 0.6s;
+      }
+      .preloader.is-done {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .preloader__mark {
+        position: relative;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translateY(6px) scale(0.94);
+        box-shadow:
+          0 0 0 1px rgba(201, 169, 110, 0.35),
+          0 24px 60px rgba(0, 0, 0, 0.6);
+        animation: preloader-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .preloader__mark img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      .preloader__sheen {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        opacity: 0;
+        background: linear-gradient(112deg, transparent 32%, rgba(255, 246, 222, 0.9) 47%, rgba(255, 232, 180, 0.45) 53%, transparent 68%) no-repeat;
+        background-size: 260% 100%;
+        background-position: 135% 0;
+        -webkit-mask: url('/brand/yakkachinar-logo-gold-256.webp') center / 100% 100% no-repeat;
+        mask: url('/brand/yakkachinar-logo-gold-256.webp') center / 100% 100% no-repeat;
+        mix-blend-mode: screen;
+        animation: preloader-sheen 0.8s cubic-bezier(0.45, 0, 0.25, 1) 0.15s forwards;
+      }
+      @keyframes preloader-in {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes preloader-sheen {
+        0% {
+          opacity: 0;
+          background-position: 135% 0;
+        }
+        20%,
+        75% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          background-position: -35% 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .preloader {
+          display: none;
+        }
+      }
+    </style>
+    <noscript><style>.preloader { display: none; }</style></noscript>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <!-- Hero photograph (LCP). Keep in sync with `images.hero` in src/data/images.ts. -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=1440&q=72"
+      imagesrcset="https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=480&q=72 480w, https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=720&q=72 720w, https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=1080&q=72 1080w, https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=1440&q=72 1440w, https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=1920&q=72 1920w, https://images.unsplash.com/photo-1552960226-639240203497?auto=format&fit=max&w=2560&q=72 2560w"
+      imagesizes="100vw"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Yakkachinar",
+        "alternateName": "Яккачинар",
+        "telephone": "+992000600400",
+        "address": { "@type": "PostalAddress", "addressLocality": "Dushanbe", "addressCountry": "TJ" },
+        "priceRange": "100–250 TJS",
+        "sameAs": ["https://www.instagram.com/yakkachinar.tj/"],
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "bestRating": "5", "reviewCount": "840" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="preloader" class="preloader" aria-hidden="true">
+      <div class="preloader__mark">
+        <img src="/brand/yakkachinar-logo-256.webp" width="108" height="108" alt="" />
+        <span class="preloader__sheen"></span>
+      </div>
+    </div>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; font-family: Georgia, serif; color: #f2ebdf; background: #0c0b09">
+        Yakkachinar — Dushanbe, Tajikistan · +992 00 060 0400 · instagram.com/yakkachinar.tj
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

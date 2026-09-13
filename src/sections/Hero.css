@@ -1,0 +1,317 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--ink-950);
+}
+
+/* ---------- Photography ---------- */
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.hero__media-parallax {
+  position: absolute;
+  inset: -2% -2% -14%;
+  translate: calc(var(--hero-px, 0) * -18px) calc(var(--hero-py, 0) * -12px);
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__image .picture {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(38% 34% at 80% 34%, rgb(201 169 110 / 0.14), transparent 72%);
+}
+
+.hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(8 7 6 / 0.82) 0%, rgb(8 7 6 / 0.2) 24%, rgb(8 7 6 / 0.28) 46%, rgb(8 7 6 / 0.9) 84%, var(--ink-950) 100%),
+    linear-gradient(90deg, rgb(8 7 6 / 0.72) 0%, rgb(8 7 6 / 0.12) 60%, rgb(8 7 6 / 0.3) 100%);
+}
+
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(130% 100% at 50% 42%, transparent 52%, rgb(0 0 0 / 0.62) 100%);
+}
+
+/* ---------- Crest medallion: WebGL on desktop, CSS 3D on touch screens ---------- */
+
+.hero__emblem-layer {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--nav-height) + 2vh);
+  right: max(var(--gutter), calc((100vw - var(--max-width)) / 2));
+  width: clamp(16rem, 28vw, 32rem);
+  aspect-ratio: 1;
+  pointer-events: none;
+  translate: calc(var(--hero-px, 0) * 26px) calc(var(--hero-py, 0) * 16px);
+}
+
+.hero-emblem {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.2s var(--ease-lux);
+}
+
+.hero-emblem.is-ready {
+  opacity: 1;
+}
+
+.hero-emblem__canvas,
+.hero-emblem__medallion {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- Copy ---------- */
+
+.hero__content {
+  position: relative;
+  translate: calc(var(--hero-px, 0) * 6px) calc(var(--hero-py, 0) * 4px);
+  display: grid;
+  justify-items: start;
+  gap: clamp(1rem, 1.8vw, 1.6rem);
+  padding-top: calc(var(--nav-height) + clamp(2.5rem, 9vh, 7rem));
+  padding-bottom: clamp(1.75rem, 4vh, 3rem);
+  container-type: inline-size;
+}
+
+/* Phones and tablets: the crest as a small physical medallion — slow float, gentle tilt, an occasional gold light. */
+.hero__crest {
+  display: inline-flex;
+  perspective: 600px;
+}
+
+.hero__crest-logo {
+  --logo-size: 4.5rem;
+  animation: crest-float 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.hero__crest-logo .brand-logo__image {
+  box-shadow:
+    0 0 0 1px rgb(201 169 110 / 0.45),
+    0 0 0 4px rgb(12 11 9 / 0.6),
+    0 0 0 5px rgb(201 169 110 / 0.18),
+    0 14px 30px rgb(0 0 0 / 0.55);
+}
+
+.hero__crest-logo .brand-logo__sheen {
+  animation: brand-sheen-loop 9s var(--ease-lux) 2.6s infinite;
+}
+
+@keyframes crest-float {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(-9deg) rotateX(4deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotateY(9deg) rotateX(-3deg);
+  }
+}
+
+.hero__eyebrow {
+  color: var(--gold-bright);
+  letter-spacing: 0.32em;
+}
+
+.hero__tagline {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.9vw, 5.4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.hero__lead {
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  color: var(--ivory-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 0.4rem;
+}
+
+/* A single flexible column: a wide element can never stretch its siblings past the container. */
+.hero__content {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/*
+ * The wordmark is set last visually — a masthead that spans the full container width.
+ * "YAKKACHINAR" measures 7.28em in Cormorant 300 at this tracking; 7.36 leaves a 1% margin.
+ */
+.hero__brand {
+  order: 10;
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+  font-family: var(--font-display);
+  font-size: calc(100cqi / 7.36);
+  font-weight: 300;
+  line-height: 0.78;
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ivory);
+}
+
+.hero__brand-word {
+  display: block;
+}
+
+.hero__letter-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-top: 0.1em;
+  margin-top: -0.1em;
+  vertical-align: top;
+}
+
+.hero__letter {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ---------- Facts band ---------- */
+
+.hero__facts {
+  position: relative;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgb(8 7 6 / 0.35), rgb(8 7 6 / 0.75));
+}
+
+.hero__facts-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hero__fact {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  min-width: 0;
+  padding-block: 1rem 1.15rem;
+}
+
+.hero__fact:nth-child(odd) {
+  padding-right: 1rem;
+}
+
+.hero__fact:nth-child(even) {
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+}
+
+.hero__fact:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--line);
+}
+
+.hero__fact dt {
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+}
+
+.hero__fact dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.5rem;
+}
+
+.hero__fact-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ivory);
+}
+
+.hero__fact-star {
+  align-self: center;
+  color: var(--gold);
+}
+
+.hero__fact-sub {
+  font-size: 0.8rem;
+  color: var(--ivory-muted);
+}
+
+@media (min-width: 640px) {
+  .hero__actions .btn {
+    flex: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero__actions {
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero__crest {
+    display: none;
+  }
+
+  .hero__facts-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero__fact,
+  .hero__fact:nth-child(odd),
+  .hero__fact:nth-child(even) {
+    padding: 1.35rem 1.5rem 1.5rem;
+    border-bottom: 0;
+  }
+
+  .hero__fact:first-child {
+    padding-left: 0;
+  }
+
+  .hero__fact + .hero__fact {
+    border-left: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 899px) {
+  .hero__emblem-layer {
+    display: none;
+  }
+}
